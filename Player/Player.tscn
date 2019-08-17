@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Player/PlayerAnimation.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/PlayerAnimation.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 60.1111
+height = 82.8889
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 460.5, 258 )
+collision_mask = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="PlayerAnimation" parent="." instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="PlayerAnimation"]
+current = true
+zoom = Vector2( 3, 3 )
+smoothing_enabled = true
+[connection signal="animate" from="." to="PlayerAnimation" method="_on_Player_animate"]
